@@ -5,6 +5,10 @@ class Player:
     def __init__(self, current_room, name):
         self.name = name
         self.current_room = current_room
+        self.inventory = []
+
+    def add_to_inventory(self, item):
+        self.inventory.append(item)
 
     def __str__(self):
         return f"The player named {self.name} is currently in room {self.current_room}"
