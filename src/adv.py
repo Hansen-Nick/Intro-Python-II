@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+import textwrap
 
 # Declare all the rooms
 
@@ -18,7 +20,7 @@ to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""")
 }
 
 
@@ -49,3 +51,45 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+new_player = Player(room['outside'], 'Nick')
+
+while True:
+    print(new_player.current_room.name)
+    wrap_list = textwrap.wrap(
+        new_player.current_room.description, width=50)
+    for string in wrap_list:
+        print(string)
+
+    user_input = input(
+        'Which direction would you like to go? Enter q to quit:  ')
+
+    if user_input == 'q':
+        break
+    elif user_input == 'n':
+        try:
+            new_player.current_room = new_player.current_room.n_to
+        except:
+            print("There is nothing in that direction")
+    elif user_input == 'e':
+        try:
+            new_player.current_room = new_player.current_room.e_to
+
+        except:
+            print("There is nothing in that direction")
+
+    elif user_input == 's':
+        try:
+            new_player.current_room = new_player.current_room.s_to
+
+        except:
+            print("There is nothing in that direction")
+    elif user_input == 'w':
+        try:
+            new_player.current_room = new_player.current_room.w_to
+
+        except:
+            print("There is nothing in that direction")
+
+    print(new_player.current_room)
