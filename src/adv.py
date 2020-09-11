@@ -105,14 +105,19 @@ while True:
                 print("There is nothing in that direction")
 
     else:
-        if user_input.split()[1] in items.keys():
-            new_player.current_room.remove_item(items[user_input.split()[1]])
-            new_player.add_to_inventory(items[user_input.split()[1]])
-            print(items[user_input.split()[1]].on_take())
-            print("room items", room['outside'].items)
-            print("player inventory", new_player.inventory)
+        if user_input.split()[0] == 'take':
+            if user_input.split()[1] in items.keys():
+                current_item = items[user_input.split()[1]]
+                new_player.current_room.remove_item(current_item)
+                new_player.add_to_inventory(current_item)
+                print(current_item.on_take())
 
-        # new_player.add_to_inventory(
-        #     items[user_input.split()[1]]
-        # )
-        # print("new player items: ", new_player.inventory)
+            else:
+                print("That item doesn't exist")
+
+        else:
+            if user_input.split()[1] in items.keys():
+                current_item = items[user_input.split()[1]]
+                new_player.current_room.add_item(current_item)
+                new_player.remove_from_inventory(current_item)
+                print(current_item.on_drop())

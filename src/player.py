@@ -10,5 +10,8 @@ class Player:
     def add_to_inventory(self, item):
         self.inventory.append(item)
 
+    def remove_from_inventory(self, item):
+        self.inventory.remove(item)
+
     def __str__(self):
         return f"The player named {self.name} is currently in room {self.current_room}"
